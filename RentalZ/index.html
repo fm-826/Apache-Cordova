@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>RentalZ</title>
+
+    <!--Essential CDN (Content Delivery Network) links for JQuery Mobile support-->
+    <meta name="viewport" content="width=default-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+
+    <!--Essential CDN (Content Delivery Network) links for JQuery Mobile support-->
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+
+
+    <!--Cascading Style Sheets code for altering appearances of page elements-->
+    <link rel="stylesheet" href="styling.css">
+
+    <!--JavaScript code for 'form reset' and 'theme toggling'-->
+    <script type="text/javascript" src="programming.js"></script>
+
+    <!--JavaScript code for Database and db-related functions-->
+    <script type="text/javascript" src="databasing.js"></script>
+
+    <!--
+    <script type="text/javascript">
+        app.initialize();
+
+    </script>
+-->
+
+    <!--Font Awesome Icons support-->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body onload="init()">
+    <div data-role="page" data-theme="a" id="pageform">
+        <!-- header  -->
+        <div data-role="header">
+            <!-- When this button is clicked, show the 'resetformPopupDialog' PopupDialog -->
+            <a href="#resetformPopupDialog" data-rel="popup" data-position-to="window" data-transition="fade" class="ui-btn-left ui-corner-all ui-shadow ui-btn-inline btnNormal">Reset</a>
+
+            <!-- Title of page -->
+            <h1>RentalZ</h1>
+
+            <!-- When this button is clicked, toggle between the light and dark themes as necessary -->
+            <a href="index.html" id="btn-theme" class="ui-btn-right btnNormal" onclick="toggleTheme()">Dark Mode</a>
+        </div>
+
+        <!-- body/content/main content  -->
+        <div data-role="content">
+            <h1>Welcome</h1>
+
+            <!--field types section-->
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <h3>&#42; = required field</h3>
+                </div>
+                <div class="ui-block-b">
+                    <h3>&loz; = optional field</h3>
+                </div>
+            </div>
+
+
+            <form>
+                <table cellpadding="2" cellspacing="2">
+                    <tr>
+                        <td><i class="fa fa-home"></i> Property type&#42;</td>
+                        <td>
+                            <select id="propertyType" required>
+                                <option disabled selected value="">Select property type</option>
+                                <option value="Apartment">Apartment</option>
+                                <option value="Bungalow">Bungalow</option>
+                                <option value="Flat">Flat</option>
+                                <option value="House">House</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-bed"></i> Bedrooms&#42;</td>
+                        <td>
+                            <select id="bedroomsCount" required>
+                                <option disabled selected value="">Select bedroom quantity</option>
+                                <option value="Studio">Studio</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-calendar"></i> Property addition date&#42;</td>
+                        <td><input type="date" id="propertyAdditionDate" required></td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-clock-o"></i> Property addition time&#42;</td>
+                        <td><input type="time" id="propertyAdditionTime" required></td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-money"></i> Monthly rent (&pound;)&#42;</td>
+                        <td><input type="number" min="100" id="monthlyRent" required></td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-shower"></i> Furniture type&#9674;</td>
+                        <td>
+                            <select id="furnitureType">
+                                <option value=""></option>
+                                <option value="Furnished">Furnished</option>
+                                <option value="Unfurnished">Unfurnished</option>
+                                <option value="Part furnished">Part furnished</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-info-circle"></i> Description&#9674;</td>
+<!--                        <td><input type="text" id="description"></td>-->
+                        <td><textarea id="despriction"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-user"></i> Reporter name&#42;</td>
+                        <td><input type="text" id="reporter" placeholder="Name Surname" required></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <!--button to add user-defined data into the table-->
+                            <input type="button" value="Add to table" class="btn-form" data-icon="plus" onclick="add()"><br>
+                            
+                            <!--button to save user-defined modified data-->
+                            <input type="button" value="Save" class="btn-form" data-icon="check" onclick="overwrite()"><br>
+                            
+                            <!--button to search user-defined data-->
+                            <input type="button" value="Search" class="btn-form" data-icon="search" onclick="search()"><br>
+                            
+                            <!--button to delete all records in the table-->
+                            <input type="button" value="Delete table" class="btn-form" data-icon="delete" onclick="delTable()"><br>
+                            
+                            <!--button to show all records data that have been stored in the table-->
+                            <input type="button" value="Show all properties" class="btn-form" data-icon="grid" onclick="displayAll()">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <br>
+            <br>
+
+            <!--Table to show data entered-->
+            <div id="result"></div>
+
+            <!-- 'Reset form' PopupDialog-->
+            <div data-role="popup" id="resetformPopupDialog" data-overlay-theme="b" data-theme="a" data-dismissible="false">
+                <div data-role="header" data-theme="a">
+                    <h1>Reset Form</h1>
+                </div>
+
+                <div data-role="main" class="ui-content">
+                    <p>All entered informaton will be erased</p>
+                    <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" style="color: white;">Cancel</a>
+                    <a href="#" onclick="resetForm()" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" style="color: white;">OK</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- footer  -->
+        <div data-role="footer">
+            <h1>&copy; 2018 RentalZ</h1>
+        </div>
+    </div>
+</body>
+
+</html>

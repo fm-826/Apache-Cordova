@@ -1,0 +1,24 @@
+@import url(http://fonts.googleapis.com/css?family=Cabin:400,300,500,700);
+
+h1 {
+    /* align the text of the h1 header instance to the centre of the screen */
+    text-align: center;
+
+    /* set the weight of the font of the h1 header instance to normal */
+    font-weight: normal;
+}
+
+h2, h3, input, textarea, .ui-page, .ui-content, .ui-btn, td {
+    /* the following applies to all 'h2', 'h3', 'input', 'textarea', '.ui-page' and '.ui-btn' instances */
+
+    /* set the font-family to the Cabin font */
+    font-family: Cabin;
+
+    /* set the font-weight to normal */
+    font-weight: normal;
+}
+
+.ui-select span {
+    /* align selected item of the selectmenu to the left */
+    text-align: left;
+}
